@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Calculator</title>
+
+<style>
+body {
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+}
+
+.calculator {
+    background: black;
+    width: 320px;
+    padding: 20px;
+    border-radius: 25px;
+}
+
+.display {
+    color: white;
+    font-size: 48px;
+    text-align: right;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+button {
+    height: 65px;
+    border-radius: 50%;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.gray { background: #a5a5a5; }
+.dark { background: #333333; color: white; }
+.orange { background: #f39c12; color: white; }
+
+.zero {
+    grid-column: span 2;
+    border-radius: 35px;
+}
+</style>
+
+<script>
+function press(val) {
+    let display = document.getElementById("display");
+    if (display.innerText === "0") {
+        display.innerText = val;
+    } else {
+        display.innerText += val;
+    }
+}
+
+function clearDisplay() {
+    document.getElementById("display").innerText = "0";
+}
+
+function calculate() {
+    let display = document.getElementById("display");
+    try {
+        display.innerText = eval(display.innerText);
+    } catch {
+        display.innerText = "Error";
+    }
+}
+</script>
+</head>
+
+<body>
+<div class="calculator">
+    <div id="display" class="display">0</div>
+
+    <div class="buttons">
+        <button class="gray" onclick="clearDisplay()">AC</button>
+        <button class="gray" onclick="press('-')">+/-</button>
+        <button class="gray" onclick="press('%')">%</button>
+        <button class="orange" onclick="press('/')">÷</button>
+
+        <button class="dark" onclick="press('7')">7</button>
+        <button class="dark" onclick="press('8')">8</button>
+        <button class="dark" onclick="press('9')">9</button>
+        <button class="orange" onclick="press('*')">×</button>
+
+        <button class="dark" onclick="press('4')">4</button>
+        <button class="dark" onclick="press('5')">5</button>
+        <button class="dark" onclick="press('6')">6</button>
+        <button class="orange" onclick="press('-')">−</button>
+
+        <button class="dark" onclick="press('1')">1</button>
+        <button class="dark" onclick="press('2')">2</button>
+        <button class="dark" onclick="press('3')">3</button>
+        <button class="orange" onclick="press('+')">+</button>
+
+        <button class="dark zero" onclick="press('0')">0</button>
+        <button class="dark" onclick="press('.')">.</button>
+        <button class="orange" onclick="calculate()">=</button>
+    </div>
+</div>
+</body>
+</html>
